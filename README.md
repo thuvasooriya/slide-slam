@@ -67,11 +67,14 @@ pixi run build
 # Run the 55-check static port verification suite:
 pixi run check-port
 
-# Run the 471 pytest regression suite:
+# Run the pytest regression suite:
 pixi run test
 
 # Run the inter-robot place recognition verification demo:
 pixi run test-place-recognition
+
+# Validate all 63 launch files resolve against the built workspace:
+pixi run launch-smoke
 ```
 
 ### 4. Convert Legacy Demo Bags & Run Multi-Robot Experiments
@@ -79,10 +82,17 @@ pixi run test-place-recognition
 # Convert legacy ROS 1 bags to ROS 2:
 pixi run convert-bags /path/to/downloaded_bags/
 
-# Launch multi-robot swarm experiment:
-cd backend/multi_robot_utils_launch/script
-./tmux_multi_robot_with_bags_forest.sh
+# Point the demo scripts at your converted bags (defaults to /opt/bags/...):
+export SLIDE_SLAM_BAG_DIR=/path/to/converted_bags
+
+# Launch a multi-robot swarm experiment (tmux is provided via Pixi):
+pixi run demo-forest
+# Other demos: demo-parking-lot, demo-indoor, demo-outdoor, demo-kitti
 ```
+
+Note: demo bags are multi-GB downloads and are not checked into git. The tmux
+demos cannot run without them. Everything else (`check-port`, `test`,
+`test-place-recognition`, `launch-smoke`) runs without bag data.
 
 ---
 
@@ -100,7 +110,7 @@ pixi run ./tools/convert_ros1_bags.sh /path/to/bag_file.bag
 
 By default the converted ROS 2 bag is written next to the original as a directory (containing `metadata.yaml` + a `.db3` sqlite3 file) with the same base name.
 
-After conversion, point `BAG_DIR` in the tmux scripts (e.g. `tmux_multi_robot_with_bags_forest.sh`) at the directory containing the converted ROS 2 bags.
+Set `SLIDE_SLAM_BAG_DIR` to that directory instead of editing the scripts.
 # Run our demos (with processed data)
 Note: if the access to any of the links is lost, please contact the authors, and we will provide the data from our lab's NAS.
 
