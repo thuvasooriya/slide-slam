@@ -314,7 +314,10 @@ void SemanticFactorGraph::addCubeFactor(
                         cube_local_meas, noise_model_cube));
 
   if (cube_local_meas.pose.translation().norm() > 50) {
-    RCLCPP_WARN_THROTTLE(gfg_logger(), *rclcpp::Clock::make_shared(), 1000,
+    // Static clock: the throttle macro captures its clock argument by
+    // reference, so a throwaway *Clock::make_shared() temporary segfaults.
+    static rclcpp::Clock throttle_clock(RCL_SYSTEM_TIME);
+    RCLCPP_WARN_THROTTLE(gfg_logger(), throttle_clock, 1000,
                          "cube_local_meas.pose.translation().norm() is larger "
                          "than 25 meters, maybe it is due to the front end keeping "
                          "track of observations over a long time or maybe it is because "

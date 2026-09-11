@@ -112,8 +112,11 @@ bool CylinderMapManager::InLoopClosureRegion(
     const int robotID, const size_t &at_least_num_of_poses_old) {
   // RCLCPP_INFO_STREAM(logger, "Checking whether in loop closure region");
   if (robotPoseCloud_[robotID]->points.size() < at_least_num_of_poses_old) {
+    // Static clock: the throttle macro captures its clock argument by
+    // reference, so a throwaway *Clock::make_shared() temporary segfaults.
+    static rclcpp::Clock throttle_clock(RCL_SYSTEM_TIME);
     RCLCPP_WARN_THROTTLE(rclcpp::get_logger("CylinderMapManager"),
-                         *rclcpp::Clock::make_shared(), 3000,
+                         throttle_clock, 3000,
                          "Not enough poses to check loop closure");
     return false;
   }
