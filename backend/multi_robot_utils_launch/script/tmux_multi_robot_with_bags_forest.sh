@@ -3,8 +3,7 @@
 
 SESSION_NAME=multi_robot_nodes
 BAG_PLAY_RATE=2.0
-#BAG_DIR='/home/sam/bags/vems-slam-bags/all_slide_slam_public_demos/forests'
-BAG_DIR='/opt/bags/vems-slam-bags/all_slide_slam_public_demos/forests'
+BAG_DIR="${SLIDE_SLAM_BAG_DIR:-/opt/bags/vems-slam-bags/all_slide_slam_public_demos/forests}"
 
 CURRENT_DISPLAY=${DISPLAY}
 if [ -z ${DISPLAY} ];
@@ -22,7 +21,7 @@ else
   exit
 fi
 
-SETUP_ROS_STRING="export ROS_MASTER_URI=http://localhost:11311"
+SETUP_ROS_STRING="test -f install/setup.bash && source install/setup.bash || true"
 
 # Make mouse useful in copy mode
 tmux setw -g mouse on
@@ -47,11 +46,11 @@ tmux split-window -h -t $SESSION_NAME
 tmux select-pane -t $SESSION_NAME:1.6
 tmux split-window -h -t $SESSION_NAME
 tmux select-pane -t $SESSION_NAME:1.0
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot0*.bag -r $BAG_PLAY_RATE -s 0 --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot0/odom /robot0/semantic_meas_sync_odom:=/robot0/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot0* -r $BAG_PLAY_RATE --start-offset 0 --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot0/odom" Enter
 tmux select-pane -t $SESSION_NAME:1.1
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot1*.bag -r $BAG_PLAY_RATE -s 0 --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot1/odom /robot0/semantic_meas_sync_odom:=/robot1/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot1* -r $BAG_PLAY_RATE --start-offset 0 --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot1/odom /robot0/semantic_meas_sync_odom:=/robot1/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.2
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot2*.bag -r $BAG_PLAY_RATE -s 40 --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot2/odom /robot0/semantic_meas_sync_odom:=/robot2/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot2* -r $BAG_PLAY_RATE --start-offset 40 --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot2/odom /robot0/semantic_meas_sync_odom:=/robot2/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.3
 tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 launch multi_robot_utils_launch publish_tf.launch.py" Enter
 tmux select-pane -t $SESSION_NAME:1.4
@@ -75,7 +74,7 @@ tmux select-layout -t $SESSION_NAME tiled
 
 # Add window for sloam
 tmux new-window -t $SESSION_NAME -n "Sloam"
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $(ros2 pkg prefix --share sloam) && ros2 launch sloam decentralized_sloam_multi_robot_forest.launch.py enable_rviz:=true" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 launch sloam decentralized_sloam_multi_robot_forest.launch.py enable_rviz:=true" Enter
 
 # Add window to easily kill all processes
 tmux new-window -t $SESSION_NAME -n "Kill"

@@ -19,7 +19,7 @@ else
   exit
 fi
 
-SETUP_ROS_STRING="source /opt/ros/jazzy/setup.bash; source ~/sloam_ws/install/setup.bash"
+SETUP_ROS_STRING="test -f install/setup.bash && source install/setup.bash || true"
 
 # Python args
 ODOM_TOPIC="/dragonfly67/quadrotor_ukf/control_odom"
@@ -43,9 +43,9 @@ tmux setw -g mouse on
 
 
 # tmux new-window -t $SESSION_NAME -n "Bag"
-# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; ros2 bag play --clock /home/sam/bags/pennovation-bags/generic_sloam_2_robots_multi_robot_MOST_IMPORTANT_2022-06-30-22-50-33.bag -s 30"
-# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 bag play --clock /home/sam/bags/xmas-slam-bags/test-indoor-sloam-and-SLC-cylinder-odom-only-bag-2023-10-26-17-58-19.bag -s 30"
-# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 bag play --clock /home/jiuzl/bags/outdoor_bag/outdoor-car-detection-drifted-5m-shorter-range-second-part-partking-lot-2023-12-05-14-21-56.bag"
+# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; ros2 bag play --clock /opt/bags/pennovation-bags/generic_sloam_2_robots_multi_robot_MOST_IMPORTANT_2022-06-30-22-50-33.bag -s 30"
+# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 bag play --clock /opt/bags/xmas-slam-bags/test-indoor-sloam-and-SLC-cylinder-odom-only-bag-2023-10-26-17-58-19.bag -s 30"
+# # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; ros2 bag play --clock /opt/bags/outdoor_bag/outdoor-car-detection-drifted-5m-shorter-range-second-part-partking-lot-2023-12-05-14-21-56.bag"
 # tmux split-window -t $SESSION_NAME
 # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; echo '[ROS2: use_sim_time is per-node]'; python3 ./merge_synced_measurements.py" Enter
 # tmux select-layout -t $SESSION_NAME tiled

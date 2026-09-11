@@ -3,7 +3,7 @@
 
 SESSION_NAME=multi_robot_nodes
 BAG_PLAY_RATE=3.0
-BAG_DIR='/home/sam/bags/vems-slam-bags/all_slide_slam_public_demos/money-shot-indoor-outdoor-eight-robots'
+BAG_DIR="${SLIDE_SLAM_BAG_DIR:-/opt/bags/vems-slam-bags/all_slide_slam_public_demos/money-shot-indoor-outdoor-eight-robots}"
 
 CURRENT_DISPLAY=${DISPLAY}
 if [ -z ${DISPLAY} ];
@@ -21,7 +21,7 @@ else
   exit
 fi
 
-SETUP_ROS_STRING="export ROS_MASTER_URI=http://localhost:11311"
+SETUP_ROS_STRING="test -f install/setup.bash && source install/setup.bash || true"
 
 # Make mouse useful in copy mode
 tmux setw -g mouse on
@@ -43,19 +43,19 @@ tmux split-window -h -t $SESSION_NAME
 tmux select-pane -t $SESSION_NAME:1.6
 tmux split-window -h -t $SESSION_NAME
 tmux select-pane -t $SESSION_NAME:1.0
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot0*.bag -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom /dragonfly67/quadrotor_ukf/control_odom:=/robot0/odom /robot0/semantic_meas_sync_odom:=/robot0/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot0* -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom --remap /dragonfly67/quadrotor_ukf/control_odom:=/robot0/odom /robot0/semantic_meas_sync_odom:=/robot0/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.1
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot1*.bag -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom /dragonfly67/quadrotor_ukf/control_odom:=/robot1/odom /robot0/semantic_meas_sync_odom:=/robot1/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot1* -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom --remap /dragonfly67/quadrotor_ukf/control_odom:=/robot1/odom /robot0/semantic_meas_sync_odom:=/robot1/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.2
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot2*.bag -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom /dragonfly67/quadrotor_ukf/control_odom:=/robot2/odom /robot0/semantic_meas_sync_odom:=/robot2/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot2* -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom --remap /dragonfly67/quadrotor_ukf/control_odom:=/robot2/odom /robot0/semantic_meas_sync_odom:=/robot2/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.3
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot3*.bag -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom /dragonfly67/quadrotor_ukf/control_odom:=/robot3/odom /robot0/semantic_meas_sync_odom:=/robot3/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot3* -r $BAG_PLAY_RATE --topics /dragonfly67/quadrotor_ukf/control_odom /robot0/semantic_meas_sync_odom --remap /dragonfly67/quadrotor_ukf/control_odom:=/robot3/odom /robot0/semantic_meas_sync_odom:=/robot3/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.4
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot4*.bag -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot4/odom /robot0/semantic_meas_sync_odom:=/robot4/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot4* -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot4/odom /robot0/semantic_meas_sync_odom:=/robot4/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.5
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot5*.bag -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot5/odom /robot0/semantic_meas_sync_odom:=/robot5/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot5* -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot5/odom /robot0/semantic_meas_sync_odom:=/robot5/semantic_meas_sync_odom" Enter
 tmux select-pane -t $SESSION_NAME:1.6
-tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot6*.bag -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot6/odom /robot0/semantic_meas_sync_odom:=/robot6/semantic_meas_sync_odom" Enter
+tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot6* -r $BAG_PLAY_RATE --topics /Odometry /robot0/semantic_meas_sync_odom --remap /Odometry:=/robot6/odom /robot0/semantic_meas_sync_odom:=/robot6/semantic_meas_sync_odom" Enter
 # tmux select-pane -t $SESSION_NAME:1.7
 # tmux send-keys -t $SESSION_NAME "$SETUP_ROS_STRING; sleep 2; cd $BAG_DIR && ros2 bag play robot7*.bag --topics /Odometry /robot0/semantic_meas_sync_odom /Odometry:=/robot7/odom /robot0/semantic_meas_sync_odom:=/robot7/semantic_meas_sync_odom" Enter
 # tmux select-pane -t $SESSION_NAME:1.8
