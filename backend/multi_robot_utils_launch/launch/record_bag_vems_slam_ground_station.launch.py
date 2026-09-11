@@ -77,6 +77,6 @@ def _build_recorder(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
-        DeclareLaunchArgument('dir', default_value='/home/sam/bags/'),
+        DeclareLaunchArgument('dir', default_value='/opt/bags/'),
         OpaqueFunction(function=_build_recorder),
     ])

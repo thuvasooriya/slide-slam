@@ -3,7 +3,7 @@ from launch.actions import ExecuteProcess
 
 
 def generate_launch_description():
-    bag_path = '/home/sam/bags/pennovation-bags/generic_sloam_2_robots_multi_robot_MOST_IMPORTANT_2022-06-30-22-50-33.bag'
+    bag_path = '/opt/bags/pennovation-bags/generic_sloam_2_robots_multi_robot_MOST_IMPORTANT_2022-06-30-22-50-33'
     # Topic remappings (source:=target) are passed as CLI remap arguments
     # to ros2 bag play.
     return LaunchDescription([

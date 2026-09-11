@@ -6,7 +6,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     dir_arg = DeclareLaunchArgument(
         'dir',
-        default_value='/home/sam/bags/xmas-slam-bags/multi-robot',
+        default_value='/opt/bags/xmas-slam-bags/multi-robot',
     )
 
     recorder = ExecuteProcess(

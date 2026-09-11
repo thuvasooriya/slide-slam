@@ -18,9 +18,9 @@ def generate_launch_description():
     )
     enable_rviz = LaunchConfiguration('enable_rviz')
 
-    bag_3rd = '/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot6-from-3rd-parking-lot-around-building-falcon-xmas-slam-pennovation_2023-10-20-13-22-40'
-    bag_2nd = '/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot5-from-2nd-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-00-01'
-    bag_1st = '/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot4-from-1st-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-07-35'
+    bag_3rd = '/opt/bags/abstract_observation_bag/fined_tuned_bag/robot6-from-3rd-parking-lot-around-building-falcon-xmas-slam-pennovation_2023-10-20-13-22-40'
+    bag_2nd = '/opt/bags/abstract_observation_bag/fined_tuned_bag/robot5-from-2nd-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-00-01'
+    bag_1st = '/opt/bags/abstract_observation_bag/fined_tuned_bag/robot4-from-1st-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-07-35'
 
     return LaunchDescription([
         DeclareLaunchArgument('enable_rviz', default_value='true'),

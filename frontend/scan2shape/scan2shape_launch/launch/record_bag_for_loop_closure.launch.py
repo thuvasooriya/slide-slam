@@ -16,7 +16,7 @@ TOPICS = [
 def generate_launch_description():
     dir_arg = DeclareLaunchArgument(
         'dir',
-        default_value='/home/sam/bags/xmas-slam-bags/test-map-merging-robot1ANDrobot2')
+        default_value='/opt/bags/xmas-slam-bags/test-map-merging-robot1ANDrobot2')
 
     out_dir = LaunchConfiguration('dir')
 

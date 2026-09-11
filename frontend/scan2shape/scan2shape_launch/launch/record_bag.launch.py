@@ -29,7 +29,7 @@ TOPICS = [
 def generate_launch_description():
     dir_arg = DeclareLaunchArgument(
         'dir',
-        default_value='/home/sam/bags/pennovation-bags/stats_car_confidence_sloam_multi_robot')
+        default_value='/opt/bags/pennovation-bags/stats_car_confidence_sloam_multi_robot')
 
     out_dir = LaunchConfiguration('dir')
 

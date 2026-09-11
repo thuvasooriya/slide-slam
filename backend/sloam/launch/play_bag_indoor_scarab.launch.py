@@ -21,9 +21,9 @@ def generate_launch_description():
     )
     enable_rviz = LaunchConfiguration('enable_rviz')
 
-    scarab40_bag = '/home/jiuzl/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab40-EST_2024-01-21-11-19-36'
-    scarab41_bag = '/home/jiuzl/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab41-EST_2024-01-21-11-19-38'
-    scarab45_bag = '/home/jiuzl/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab45-EST_2024-01-21-11-19-38'
+    scarab40_bag = '/opt/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab40-EST_2024-01-21-11-19-36'
+    scarab41_bag = '/opt/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab41-EST_2024-01-21-11-19-38'
+    scarab45_bag = '/opt/bags/abstract_observation_bag/scarab-with-comm/Scarabs-with-comms-VEMS-SLAM-scarab45-EST_2024-01-21-11-19-38'
 
     return LaunchDescription([
         DeclareLaunchArgument('enable_rviz', default_value='false'),

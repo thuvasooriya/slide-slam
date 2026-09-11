@@ -7,7 +7,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'dir',
-            default_value='/home/sam/bags/xmas-slam-bags/multi-robot',
+            default_value='/opt/bags/xmas-slam-bags/multi-robot',
         ),
         ExecuteProcess(
             cmd=[

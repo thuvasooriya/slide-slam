@@ -19,7 +19,7 @@ TOPICS = [
 def generate_launch_description():
     dir_arg = DeclareLaunchArgument(
         'dir',
-        default_value='/home/sam/bags/pennovation-bags/confidence_stats')
+        default_value='/opt/bags/pennovation-bags/confidence_stats')
 
     out_dir = LaunchConfiguration('dir')
 

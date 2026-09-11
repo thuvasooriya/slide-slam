@@ -29,7 +29,7 @@ def _build_recorder(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
-        DeclareLaunchArgument('dir', default_value='/home/sam/bags/xmas-slam-bags'),
+        DeclareLaunchArgument('dir', default_value='/opt/bags/xmas-slam-bags'),
         DeclareLaunchArgument('robot1_ns', default_value='/quadrotor1'),
         DeclareLaunchArgument('robot2_ns', default_value='/quadrotor2'),
         DeclareLaunchArgument('robot3_ns', default_value='/quadrotor3'),
