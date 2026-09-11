@@ -15,3 +15,17 @@ scan2shape/script/max_scale.pkl
 *.npy
 .vscode
 *.png
+/build/
+/install/
+/devel/
+/log/
+/logs/
+/.pixi/
+build/
+install/
+devel/
+log/
+logs/
+.pixi/
+/.catkin_tools/
+.catkin_tools/

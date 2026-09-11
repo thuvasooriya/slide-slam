@@ -16,8 +16,8 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 # Table of contents
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
-- [Use docker (recommended)](#use-docker-recommended)
-- [Build from source (only if you do not want to use docker)](#build-from-source-only-if-you-do-not-want-to-use-docker)
+- [Hermetic Quickstart with Pixi (Recommended)](#hermetic-quickstart-with-pixi-recommended)
+- [Build from source (Manual without Pixi)](#build-from-source-manual-without-pixi)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
   - [Download example data](#download-example-data)
   - [What these demos will do](#what-these-demos-will-do)
@@ -33,88 +33,39 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 
 
 
-# Use docker (recommended)
+# Hermetic Quickstart with Pixi (Recommended)
 
-**Install docker**: https://docs.docker.com/desktop/install/linux/ubuntu/#install-docker-desktop
+SlideSLAM on ROS 1 Noetic is packaged with [Pixi](https://pixi.sh), providing a 100% hermetic, zero-Docker, zero-sudo environment using `conda-forge` and `robostack`. It provisions ROS 1 Noetic, GTSAM, PCL, OpenCV, Eigen 3.4, Sophus, Qhull, and all build tools locally without touching your host system or `/usr/local`.
 
-**Pull the docker image**: 
-```
-docker pull xurobotics/slide-slam:latest
-```
-
-**Create the workspace (important)**
-```
-mkdir -p ~/slideslam_docker_ws/src
-cd ~/slideslam_docker_ws/src
-```
-_Creating the workspace outside the docker helps you keep your files and changes within the workspace even if you delete the un-committed docker container._
-
-**Clone the repo**: 
-```
-git clone https://github.com/XuRobotics/SLIDE_SLAM.git
-cd ~/slideslam_docker_ws/src/SLIDE_SLAM
-chmod +x run_slide_slam_docker.sh
+### 1. Install Pixi / mise
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+# or if you use mise:
+mise use -g pixi
 ```
 
-**(Optional) Only if you need to run on LiDAR data, install Faster-LIO and LiDAR drivers**: 
-```
-cd ~/slideslam_docker_ws/src
-git clone git@github.com:ouster-lidar/ouster_example.git && cd ouster_example && git checkout 43107a1 && cd ..
-git clone git@github.com:XuRobotics/faster-lio
-git clone git@github.com:KumarRobotics/ouster_decoder.git && cd ouster_decoder && git checkout d66b52d  && cd ..
-```
-*Find the ```CMakeLists.txt``` in ```ouster_decoder``` and comment out the last three lines (the ```ouster_viz```) to avoid fmt issue*
+### 2. Clone & Build
+```bash
+git clone https://github.com/thuvasooriya/slide-slam.git
+cd slide-slam
 
-**Run the docker image**: 
+# 1-command dependency resolution & hermetic environment install:
+pixi install
 
-**Important:** Go to `./run_slide_slam_docker.sh`, make sure the following three directories are correct
-```
-SlideSlamWs="/home/sam/slideslam_docker_ws"
-```
-should point to your workspace directory
-```
-SlideSlamCodeDir="/home/sam/slideslam_docker_ws/src/SLIDE_SLAM"
-``` 
-should point to your code directory where you cloned the repository
-```
-BAGS_DIR="/home/sam/bags"
-```
-should point to your bags (data) directory
+# Initialize workspace configuration (first time only):
+pixi run config
 
-Then run:
-```
-./run_slide_slam_docker.sh
+# Build all ROS 1 Noetic packages in parallel:
+pixi run build
 ```
 
-**Build the workspace**: 
-```
-cd /opt/slideslam_docker_ws
-catkin build -DCMAKE_BUILD_TYPE=Release
+### 3. Verify & Run Tests
+```bash
+# Run the place recognition verification test:
+pixi run test
 ```
 
-**Run the demos**
-```
-source /opt/slideslam_docker_ws/devel/setup.bash
-```
-Follow the instructions below to run the demos. Remember to commit your changes inside docker envirnoment to keep them (e.g. newly installed pkgs). 
-
-Type `exit` to exit the container.
-
-You can re-enter the container, or enter the container from a new terminal by either 
-```
-docker start slideslam_ros && docker exec -it slideslam_ros /bin/bash
-``` 
-or remove your docker container using the command 
-```
-docker rm slideslam_ros
-``` 
-before you run the docker image again.
-
-**Troubleshoot**:
-- If you do not see your code or bags inside docker, double check `run_slide_slam_docker.sh` file to make sure you have your workspace and BAG folders mapped properly. 
-
-
-# Build from source (only if you do not want to use docker)
+# Build from source (Manual without Pixi)
 
 **Install ROS** (code currently only tested on Ubuntu 20.04 + ROS Noetic)
 
