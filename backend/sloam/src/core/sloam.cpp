@@ -304,5 +304,8 @@ bool sloam::RunSloam(SloamInput &in, SloamOutput &out) {
     return success;
   }
 } // end of RunSloam
+template void sloam::matchModels<Cylinder>(const std::vector<Cylinder> &, const std::vector<Cylinder> &, std::vector<int> &);
+template void sloam::matchCubeModels<Cube>(const std::vector<Cube> &, const std::vector<Cube> &, std::vector<int> &);
+template void sloam::matchEllipsoidModels<Ellipsoid>(const std::vector<Ellipsoid> &, const std::vector<Ellipsoid> &, std::vector<int> &);
 
 } // namespace sloam
