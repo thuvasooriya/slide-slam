@@ -1,0 +1,68 @@
+[workspace]
+name = "slide_slam"
+version = "1.0.0"
+description = "Hermetic ROS 2 Jazzy build of SlideSLAM via Pixi & RoboStack"
+channels = ["https://repo.prefix.dev/robostack-jazzy", "conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+# Build system and compilers
+cmake = ">=3.24"
+ninja = ">=1.11"
+c-compiler = ">=2.0"
+cxx-compiler = ">=2.0"
+colcon-common-extensions = "*"
+
+# Core math, optimization & vision libraries
+gtsam = "4.2.*"
+eigen = "3.4.*"
+libboost-devel = ">=1.85"
+suitesparse = "7.*"
+tbb-devel = "*"
+glog = "*"
+qhull = "2020.2.*"
+sophus = "1!1.24.*"
+fmt = ">=10"
+pcl = "*"
+
+# ROS 2 Jazzy core & interfaces
+ros-jazzy-ros-base = "*"
+ros-jazzy-ament-cmake = "*"
+ros-jazzy-rosidl-default-generators = "*"
+ros-jazzy-rosidl-default-runtime = "*"
+ros-jazzy-rclcpp = "*"
+ros-jazzy-rclcpp-components = "*"
+ros-jazzy-rclcpp-action = "*"
+ros-jazzy-rclpy = "*"
+ros-jazzy-std-msgs = "*"
+ros-jazzy-geometry-msgs = "*"
+ros-jazzy-sensor-msgs = "*"
+ros-jazzy-nav-msgs = "*"
+ros-jazzy-builtin-interfaces = "*"
+ros-jazzy-action-msgs = "*"
+
+# Perception & Transforms
+ros-jazzy-tf2-ros = "*"
+ros-jazzy-tf2-eigen = "*"
+ros-jazzy-tf2-geometry-msgs = "*"
+ros-jazzy-cv-bridge = "*"
+ros-jazzy-image-transport = "*"
+ros-jazzy-message-filters = "*"
+ros-jazzy-pcl-ros = "*"
+ros-jazzy-pcl-conversions = "*"
+ros-jazzy-sensor-msgs-py = "*"
+ros-jazzy-ament-index-cpp = "*"
+ros-jazzy-ament-index-python = "*"
+
+# Python runtime and utilities
+python = ">=3.10"
+numpy = "*"
+rosbags = "*"
+pytest = "*"
+qhull-static = ">=2020.2,<2021"
+
+[tasks]
+check-port = "bash tests/static/check_ros2_port.sh"
+build-msgs = "colcon build --packages-select sloam_msgs --symlink-install"
+build = "colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release"
+test-python = "pytest tests/python -v"
