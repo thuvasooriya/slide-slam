@@ -45,7 +45,7 @@ eigen = "*"
 fmt = "*"
 yaml-cpp = "*"
 qhull = "*"
-qhull-static = "*"
+tmux = "*"
 
 [tasks]
 config = "catkin config --init --source-space ."

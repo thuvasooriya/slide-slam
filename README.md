@@ -64,6 +64,10 @@ pixi run build
 pixi run test
 ```
 
+Note: demo bags are multi-GB downloads and are not checked into git. Point the
+demo scripts at your download via `export SLIDE_SLAM_BAG_DIR=/path/to/bags`
+(defaults to `/opt/bags/...`). `pixi run test` needs no bag data.
+
 # Run our demos (with processed data)
 Note: if the access to any of the links is lost, please contact the authors, and we will provide the data from our lab's NAS.
 

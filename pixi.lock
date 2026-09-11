@@ -187,7 +187,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python-orocos-kdl-1.5.1-py39hf88036b_8.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyyaml-6.0.2-py39h9399b63_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/qhull-2020.2-h434a139_5.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/qhull-static-2020.2-h434a139_5.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/qt-5.12.9-hda022c4_4.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.3-hd6e31c0_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rhash-1.4.3-hd590300_2.conda
@@ -199,6 +198,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tbb-devel-2021.7.0-h924138e_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tinyxml2-9.0.0-h9c3ff4c_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_h4845f30_101.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/tmux-3.3-h385fc29_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/unixodbc-2.3.14-h69e2008_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/utfcpp-4.09-ha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/vtk-9.1.0-qt_py39hd5cda67_206.tar.bz2
@@ -2892,18 +2892,6 @@ packages:
     - qhull >=2020.2,<2020.3.0a0
   size: 552937
   timestamp: 1720813982144
-- conda: https://conda.anaconda.org/conda-forge/linux-64/qhull-static-2020.2-h434a139_5.conda
-  sha256: b02a0e50dd4b5cb619b862c83cde685988c2a6dceb687198ae9ac3cfa8c4c926
-  md5: 0556a8e4d1b88edbf12969718634f3da
-  depends:
-  - __glibc >=2.17,<3.0.a0
-  - libgcc-ng >=12
-  - libstdcxx-ng >=12
-  - qhull 2020.2 h434a139_5
-  license: LicenseRef-Qhull
-  run_exports: {}
-  size: 444184
-  timestamp: 1720814041633
 - conda: https://conda.anaconda.org/conda-forge/linux-64/qt-5.12.9-hda022c4_4.tar.bz2
   sha256: 50d2af1cb07cddd2f6542707512e2c5ef0ef9f727d23fe387577a7effd6893ef
   md5: afebab1f5049d66baaaec67d9ce893f0
@@ -3072,6 +3060,17 @@ packages:
     - tk >=8.6.13,<8.7.0a0
   size: 3318875
   timestamp: 1699202167581
+- conda: https://conda.anaconda.org/conda-forge/linux-64/tmux-3.3-h385fc29_0.tar.bz2
+  sha256: cba5f2ec2f6a246825f09f75b18f66fd27ce82cbaf34a8c1270ae70b447910b1
+  md5: 01231a5b4e0ed9a7a9f05aa2ce2b8cf2
+  depends:
+  - libevent >=2.1.10,<2.1.11.0a0
+  - libgcc-ng >=12
+  - ncurses >=6.3,<7.0a0
+  license: ISC
+  run_exports: {}
+  size: 469885
+  timestamp: 1654155507944
 - conda: https://conda.anaconda.org/conda-forge/linux-64/unixodbc-2.3.14-h69e2008_0.conda
   sha256: dd5fe5cdd5538e253116b67323ce3024dd42a5b0f161b5201380ed1736abd334
   md5: c6c242d6c61f6fc3ee50f64c4771d8d7
