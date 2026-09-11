@@ -186,19 +186,12 @@ if(CLIPPER_BUILD_BINDINGS_PYTHON)
     add_subdirectory(bindings/python)
 endif()
 
-if(CLIPPER_BUILD_BINDINGS_MATLAB)
-    message(STATUS "Attempting to build MATLAB bindings.")
-    add_subdirectory(bindings/matlab)
-endif()
 
 if(CLIPPER_BUILD_TESTS)
     enable_testing()
     add_subdirectory(test)
 endif()
 
-if(CLIPPER_BUILD_BENCHMARKS)
-    add_subdirectory(benchmarks)
-endif()
 
 ###############################################################################
 # Install
