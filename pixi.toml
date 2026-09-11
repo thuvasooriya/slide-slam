@@ -61,6 +61,7 @@ rosbags = "*"
 pytest = "*"
 qhull-static = ">=2020.2,<2021"
 tmux = "*"
+gdown = ">=6.2.0,<7"
 
 [tasks]
 check-port = "bash tests/static/check_ros2_port.sh"
@@ -69,8 +70,11 @@ build = { cmd = "colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=
 test = { cmd = "pytest tests/python -v", env = { PYTEST_DISABLE_PLUGIN_AUTOLOAD = "1" } }
 test-place-recognition = { cmd = "../../install/sloam/lib/sloam/sloam_place_recognition_test", cwd = "backend/sloam", depends-on = ["build"] }
 launch-smoke = { cmd = "bash -c 'source install/setup.bash && bash tests/integration/launch_smoke_test.sh'", depends-on = ["build"] }
+download-model = "python -m gdown https://drive.google.com/drive/folders/1kQI8mgckA8jAsQJ5Q2qMu-3KzVF5JLqv -O /tmp/slide_slam_bags/model"
+download-demo-data = "python -m gdown \"$SLIDE_SLAM_BAG_URL\" -O \"${SLIDE_SLAM_BAG_DIR:-/opt/bags}\""
 demo-forest = { cmd = "bash backend/multi_robot_utils_launch/script/tmux_multi_robot_with_bags_forest.sh", depends-on = ["build"] }
 demo-parking-lot = { cmd = "bash backend/multi_robot_utils_launch/script/tmux_multi_robot_with_bags_parking_lot.sh", depends-on = ["build"] }
+demo-synthetic = { cmd = "bash tools/synth_e2e.sh", depends-on = ["build"] }
 demo-indoor = { cmd = "bash backend/multi_robot_utils_launch/script/tmux_single_indoor_robot.sh", depends-on = ["build"] }
 demo-outdoor = { cmd = "bash backend/multi_robot_utils_launch/script/tmux_single_outdoor_robot.sh", depends-on = ["build"] }
 demo-kitti = { cmd = "bash backend/multi_robot_utils_launch/script/tmux_single_outdoor_kitti.sh", depends-on = ["build"] }
