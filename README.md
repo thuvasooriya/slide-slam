@@ -17,7 +17,6 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
 - [Quickstart with Pixi (Recommended)](#quickstart-with-pixi-recommended)
-- [Build from source (Manual without Pixi)](#build-from-source-manual-without-pixi)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
   - [Download example data](#download-example-data)
   - [What these demos will do](#what-these-demos-will-do)
@@ -65,120 +64,6 @@ pixi run build
 pixi run test
 ```
 
-# Build from source (Manual without Pixi)
-
-**Install ROS** (code currently only tested on Ubuntu 20.04 + ROS Noetic)
-
-Please refer to this [link](https://wiki.ros.org/noetic/Installation/Ubuntu) for installing ROS Noetic
-
-**Create your workspace under your preferred directory** (e.g., we name this directory as `~/slideslam_ws`):
-```
-cd ~
-mkdir slideslam_ws
-cd slideslam_ws 
-mkdir src
-cd src
-```
-
-**Then, pull the slideslam github repo**:
-```
-git clone https://github.com/XuRobotics/SLIDE_SLAM.git
-```
-
-**Install qhull 8.0.2**: 
-  
-*Download from [this link](http://www.qhull.org/download/qhull-2020-src-8.0.2.tgz), extract (unzip) the file, then:*
-```
-cd build
-cmake ..
-make install
-```
-*If ```make install``` gives a permission error then try ```sudo make install```*
-
-**Install gtsam 4.0.3**:
-
-```
-sudo add-apt-repository ppa:borglab/gtsam-release-4.0 
-sudo apt update  
-sudo apt install libgtsam-dev libgtsam-unstable-dev
-```
-
-**Install Sophus**: 
-```
-git clone https://github.com/strasdat/Sophus.git && \
-    cd Sophus && git checkout 49a7e1286910019f74fb4f0bb3e213c909f8e1b7 && \
-    mkdir build && cd build && \
-    cmake -DCMAKE_BUILD_TYPE=Release .. && make
-sudo make install
-```
-
-**Install fmt 8.0.0**:
-```
-git clone https://github.com/fmtlib/fmt.git && \
-    cd fmt && git checkout 8.0.0 && \
-    mkdir build && cd build && \
-    cmake .. && make  
-sudo make install
-```
-
-**Install ros_numpy**:
-```
-sudo apt install ros-noetic-ros-numpy
-```
-
-**(Optional) Only if you need to run on LiDAR data, install Faster-LIO and LiDAR drivers**: 
-```
-sudo apt update
-sudo apt-get install -y libgoogle-glog-dev
-cd ~/slideslam_ws/src
-git clone http://github.com/ouster-lidar/ouster_example.git && cd ouster_example && git checkout 43107a1 && cd ..
-git clone https://github.com/XuRobotics/faster-lio.git
-git clone https://github.com/KumarRobotics/ouster_decoder.git && cd ouster_decoder && git checkout d66b52d  && cd ..
-```
-*Find the ```CMakeLists.txt``` in ```ouster_decoder``` and comment out the last three lines (the ```ouster_viz```) to avoid fmt issue*
-
-**(Optional) Only if you need to run on RGBD data with YOLOv8, install the following**:
-```
-pip install ultralytics==8.0.59
-```
-
-**Install pip dependencies**:
-```
-pip install numpy==1.22.3
-pip install scikit-learn
-pip install scipy
-pip install open3d
-pip install matplotlib
-pip install git+https://github.com/dimatura/pypcd.git
-```
-
-- Install `tmux` for running our demo experiments
-```
-sudo apt update
-sudo apt install tmux
-```
-
-**Build in release mode**
-```
-source /opt/ros/noetic/setup.bash
-cd ~/slideslam_ws
-catkin build -DCMAKE_BUILD_TYPE=Release
-```
-**Source your workspace using**
-```
-source ~/slideslam_ws/devel/setup.bash
-```
-
-
-
-**Troubleshoot:**
-- If you have built GTSAM from source before, you need to remove everything related to gtsam/GTSAM in /usr/local by doing:
-```
-sudo rm -rf /usr/local/lib/cmake/*GTSAM*
-sudo rm -rf /usr/local/include/gtsam
-```
-- If you have installed GTSAM using apt-get, remove them first, use this command `sudo apt remove --purge libgtsam*
-
 # Run our demos (with processed data)
 Note: if the access to any of the links is lost, please contact the authors, and we will provide the data from our lab's NAS.
 
@@ -200,10 +85,9 @@ Please download the processed data bags from [this link](https://drive.google.co
 
 **Option 1:** Use our tmux script (recommended)
 
-Source and go to the ' folder inside `multi_robot_utils_launch` package:
-```
-source ~/slideslam_ws/devel/setup.bash
-roscd multi_robot_utils_launch/script
+Navigate to the `script` folder inside the `multi_robot_utils_launch` package (or enter `pixi shell` first):
+```bash
+cd backend/multi_robot_utils_launch/script
 ```
 
 Modify `tmux_multi_robot_with_bags_forest.sh` to set the `BAG_DIR` to where you downloaded the bags
@@ -243,10 +127,9 @@ Please download our trained RangeNet++ model from [this link](https://drive.goog
 
 **Option 1:** Use our tmux script (recommended)
 
-Source and go to the ' folder inside `multi_robot_utils_launch` package:
-```
-source ~/slideslam_ws/devel/setup.bash
-roscd multi_robot_utils_launch/script
+Navigate to the `script` folder inside the `multi_robot_utils_launch` package (or enter `pixi shell` first):
+```bash
+cd backend/multi_robot_utils_launch/script
 ```
 
 Modify `tmux_single_indoor_robot.sh` to set the `BAG_DIR` to where you downloaded the bags
@@ -283,10 +166,9 @@ If you want to terminate this program, go to the last terminal window and press 
 
 Make sure you edit the ```infer_node_params.yaml``` file present inside the ```scan2shape_launch/config``` folder and set the value of ```model_dir``` param to point to the path to the RangeNet++ model you downloaded in the previous step. Make sure to compelte the path with the ```/``` at the end.
 
-Source and go to the ' folder inside `multi_robot_utils_launch` package:
-```
-source ~/slideslam_ws/devel/setup.bash
-roscd multi_robot_utils_launch/script
+Navigate to the `script` folder inside the `multi_robot_utils_launch` package (or enter `pixi shell` first):
+```bash
+cd backend/multi_robot_utils_launch/script
 ```
 
 Modify `tmux_single_outdoor_robot.sh` to set the `BAG_DIR` to where you downloaded the bags
@@ -311,10 +193,9 @@ If you want to terminate this program, go to the last terminal window and press 
 
 **Option 1:** Use our tmux script
 
-Source and go to the ' folder inside `multi_robot_utils_launch` package:
-```
-source ~/slideslam_ws/devel/setup.bash
-roscd multi_robot_utils_launch/script
+Navigate to the `script` folder inside the `multi_robot_utils_launch` package (or enter `pixi shell` first):
+```bash
+cd backend/multi_robot_utils_launch/script
 ```
 
 Modify `tmux_single_outdoor_kitti.sh` to set the `BAG_DIR` to where you downloaded the bags
