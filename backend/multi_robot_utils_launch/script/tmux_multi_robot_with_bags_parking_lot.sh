@@ -3,8 +3,7 @@
 
 SESSION_NAME=multi_robot_nodes
 BAG_PLAY_RATE=2.0
-# BAG_DIR='/home/sam/bags/vems-slam-bags/all_slide_slam_public_demos/parking-lot'
-BAG_DIR='/opt/bags/vems-slam-bags/all_slide_slam_public_demos/parking-lot'
+BAG_DIR="${SLIDE_SLAM_BAG_DIR:-/opt/bags/vems-slam-bags/all_slide_slam_public_demos/parking-lot}"
 
 CURRENT_DISPLAY=${DISPLAY}
 if [ -z ${DISPLAY} ];

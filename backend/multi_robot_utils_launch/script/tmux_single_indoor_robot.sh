@@ -3,10 +3,7 @@
 
 SESSION_NAME=slide_slam_nodes
 BAG_PLAY_RATE=0.5
-#BAG_DIR='/home/sam/bags/vems-slam-bags/all_slide_slam_public_demos/forests'
-# BAG_DIR='/opt/bags/vems-slam-bags/all_slide_slam_public_demos/forests'
-# BAG_DIR='/home/sam/bags/vems-slam-bags/all_slide_slam_public_demos/indoor'
-BAG_DIR='/opt/bags/vems-slam-bags/all_slide_slam_public_demos/indoor'
+BAG_DIR="${SLIDE_SLAM_BAG_DIR:-/opt/bags/vems-slam-bags/all_slide_slam_public_demos/indoor}"
 
 CURRENT_DISPLAY=${DISPLAY}
 if [ -z ${DISPLAY} ];
