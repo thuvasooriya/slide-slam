@@ -133,6 +133,7 @@ environments:
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libegl-1.7.0-ha4b6fd6_5.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libegl-devel-1.7.0-ha4b6fd6_5.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libev-4.33-h280c20c_3.conda
+      - conda: https://repo.prefix.dev/conda-forge/linux-64/libevent-2.1.12-h5348a74_2.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libexpat-2.8.1-hecca717_1.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libffi-3.7.0-h81df57d_1.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/libflac-1.5.0-he200343_1.conda
@@ -296,6 +297,7 @@ environments:
       - conda: https://repo.prefix.dev/conda-forge/linux-64/tbb-devel-2023.1.0-hfd44327_0.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/tinyxml2-11.0.0-h3f2d84a_0.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/tk-8.6.13-noxft_h1df4ec4_4.conda
+      - conda: https://repo.prefix.dev/conda-forge/linux-64/tmux-3.7c_-hd13ee6d_0.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/uncrustify-0.83.0-h54a6638_0.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/unicodedata2-17.0.1-py312h4c3975b_0.conda
       - conda: https://repo.prefix.dev/conda-forge/linux-64/urdfdom-4.0.1-h8631160_4.conda
@@ -2578,6 +2580,20 @@ packages:
     - libev >=4.33,<4.34.0a0
   size: 43220
   timestamp: 1785917328200
+- conda: https://repo.prefix.dev/conda-forge/linux-64/libevent-2.1.12-h5348a74_2.conda
+  sha256: f874779772878f3b509c607de9089c282f71232fde4cac876fc660d29670f28d
+  md5: 2e699c6e151045b2cfea34b53ed69439
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - libgcc >=15
+  - openssl >=3.5.8,<4.0a0
+  license: BSD-3-Clause
+  license_family: BSD
+  run_exports:
+    weak:
+    - libevent >=2.1.12,<2.1.13.0a0
+  size: 431007
+  timestamp: 1788870247867
 - conda: https://repo.prefix.dev/conda-forge/linux-64/libexpat-2.8.1-hecca717_1.conda
   sha256: 16feffd9ddbbe5b718515d38ee376c685ba95491cd901244e24671d20b952a77
   md5: b24d3c612f71e7aa74158d92106318b2
@@ -5208,6 +5224,20 @@ packages:
     - tk >=8.6.13,<8.7.0a0
   size: 3566806
   timestamp: 1787272857910
+- conda: https://repo.prefix.dev/conda-forge/linux-64/tmux-3.7c_-hd13ee6d_0.conda
+  sha256: da737c4dfa83c2124e96c102f43275dd8662847d52c7d59c2ccea5bce9d21f8f
+  md5: 45aa7070c37d18b473cdc8ebe83805a3
+  depends:
+  - libevent
+  - ncurses
+  - libgcc >=15
+  - __glibc >=2.17,<3.0.a0
+  - libevent >=2.1.12,<2.1.13.0a0
+  - ncurses >=6.6,<7.0a0
+  license: ISC
+  run_exports: {}
+  size: 585207
+  timestamp: 1787100142165
 - conda: https://repo.prefix.dev/conda-forge/linux-64/uncrustify-0.83.0-h54a6638_0.conda
   sha256: 556ea427c375c2b9eb3122b19a1ce0891d535ad51a196f25c73786bb1d7c5156
   md5: 29f7fdf10a9604e18924eebbde71ce62
