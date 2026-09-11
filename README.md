@@ -75,6 +75,9 @@ pixi run test-place-recognition
 
 # Validate all 63 launch files resolve against the built workspace:
 pixi run launch-smoke
+
+# Full 3-robot SLAM run on a synthetic forest bag (no download needed):
+pixi run demo-synthetic
 ```
 
 ### 4. Convert Legacy Demo Bags & Run Multi-Robot Experiments
@@ -92,7 +95,7 @@ pixi run demo-forest
 
 Note: demo bags are multi-GB downloads and are not checked into git. The tmux
 demos cannot run without them. Everything else (`check-port`, `test`,
-`test-place-recognition`, `launch-smoke`) runs without bag data.
+`test-place-recognition`, `launch-smoke`, `demo-synthetic`) runs without bag data.
 
 ---
 

@@ -44,3 +44,23 @@ before pointing `model_dir` at them.
 - Verified without bag data: `check-port` (55/55), `pytest` (470 passed,
   3 skipped), `test-place-recognition` (11 inliers, 0.34 overlap, loop closure
   found), `launch-smoke` (63/63, requires sourced `install/setup.bash`).
+
+## Fixed during verification (synthetic end-to-end runs)
+
+- Missing `/sloam` node namespace: ROS1 ran the node under
+  `NodeHandle("sloam")`, but the port constructed `rclcpp::Node("sloam")`
+  with no namespace. Relative `odom` resolved to `/odom` (shared by all
+  robots) instead of `/sloam/odom`, so the launch remap to
+  `/robot<id>/odom` never matched and no odometry ever arrived. Fixed in
+  `backend/sloam/src/core/inputNode.cpp` (`Node("sloam", "sloam")`).
+- Throttle-clock segfault: `RCLCPP_*_THROTTLE` with a throwaway
+  `*rclcpp::Clock::make_shared()` crashed every node on first execution
+  with data (exit -11 in `CylinderMapManager::InLoopClosureRegion`).
+  Replaced with function-static clocks in `cylinderMapManager.cpp` and
+  `factorgraph/graph.cpp`.
+- `demo-synthetic` (`pixi run demo-synthetic`, `tools/synth_e2e.sh`) now
+  covers the full loop without downloads: 3 robots, inter-loop closures
+  found for pairs 1-0 and 2-0, zero crashes.
+- Model weights: the current `penn_smallest.zip` upload already ships
+  extensionless PyTorch weight files, so the README's `.zip`-rename step
+  is a no-op for this copy.
