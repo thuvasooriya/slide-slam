@@ -16,8 +16,9 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 # Table of contents
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
-- [Use docker (recommended)](#use-docker-recommended)
-- [Build from source (only if you do not want to use docker)](#build-from-source-only-if-you-do-not-want-to-use-docker)
+- [Hermetic Quickstart with Pixi (Recommended)](#hermetic-quickstart-with-pixi-recommended)
+- [Build from source (Manual without Pixi)](#build-from-source-manual-without-pixi)
+- [Use docker](#use-docker)
 - [Converting ROS1 bags to ROS2 (required before running demos)](#converting-ros1-bags-to-ros2-required-before-running-demos)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
   - [Download example data](#download-example-data)
@@ -39,16 +40,55 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 
 
 
-# Use docker (recommended)
+# Hermetic Quickstart with Pixi (Recommended)
 
-**Install docker**: https://docs.docker.com/desktop/install/linux/ubuntu/#install-docker-desktop
+SlideSLAM on ROS 2 Jazzy is packaged with [Pixi](https://pixi.sh), providing a 100% hermetic, zero-Docker, zero-sudo environment using `conda-forge` and `robostack-jazzy`. It provisions ROS 2 Jazzy, GTSAM 4.2, PCL, OpenCV, Eigen 3.4, Sophus, Qhull, and all build tools locally without touching your host system or `/usr/local`.
 
-**Pull the docker image**: 
+### 1. Install Pixi / mise
+```bash
+curl -fsSL https://pixi.sh/install.sh | bash
+# or if you use mise:
+mise use -g pixi
 ```
-docker pull xurobotics/slide-slam:ros2-jazzy
-```
-_Note: the `ros2-jazzy` tag is a placeholder and may not yet be published on Docker Hub. Build it locally or update the tag once it is available._
 
+### 2. Clone & Build
+```bash
+git clone https://github.com/thuvasooriya/slide-slam.git
+cd slide-slam
+git checkout ros2_dev
+
+# 1-command dependency resolution & hermetic environment install:
+pixi install
+
+# Build all 5 ROS 2 Jazzy workspace packages in parallel:
+pixi run build
+```
+
+### 3. Verify & Run Tests
+```bash
+# Run the 55-check static port verification suite:
+pixi run check-port
+
+# Run the 471 pytest regression suite:
+pixi run test
+
+# Run the inter-robot place recognition verification demo:
+pixi run test-place-recognition
+```
+
+### 4. Convert Legacy Demo Bags & Run Multi-Robot Experiments
+```bash
+# Convert legacy ROS 1 bags to ROS 2:
+pixi run convert-bags /path/to/downloaded_bags/
+
+# Launch multi-robot swarm experiment:
+cd backend/multi_robot_utils_launch/script
+./tmux_multi_robot_with_bags_forest.sh
+```
+
+---
+
+# Use docker
 **Create the workspace (important)**
 ```
 mkdir -p ~/slideslam_docker_ws/src
@@ -122,7 +162,7 @@ before you run the docker image again.
 - If you do not see your code or bags inside docker, double check `run_slide_slam_docker.sh` file to make sure you have your workspace and BAG folders mapped properly. 
 
 
-# Build from source (only if you do not want to use docker)
+# Build from source (Manual without Pixi)
 
 **Install ROS2 Jazzy on Ubuntu 24.04**
 
