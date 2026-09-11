@@ -106,7 +106,10 @@ class InputManager : public rclcpp::Node {
   bool turn_off_intra_loop_closure_;
 };
 
-InputManager::InputManager() : rclcpp::Node("sloam") {
+// Namespace mirrors ROS1 main (NodeHandle n("sloam")): relative "odom" must
+// resolve to /sloam/odom so the launch remap to /robot<id>/odom applies, and
+// relative map pubs land under /sloam/ for per-robot remapping.
+InputManager::InputManager() : rclcpp::Node("sloam", "sloam") {
   tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
   tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
   broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(this);
