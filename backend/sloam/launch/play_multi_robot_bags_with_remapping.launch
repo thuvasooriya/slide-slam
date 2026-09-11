@@ -5,9 +5,9 @@
         <node pkg="rviz" type="rviz" name="sloam_rviz" output="screen" args="-d $(find sloam)/launch/rviz/decentralized_sloam.rviz" />
     </group>
 
-    <arg name="3rd-parking-lot-bag" value="/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot6-from-3rd-parking-lot-around-building-falcon-xmas-slam-pennovation_2023-10-20-13-22-40.bag"/>
-    <arg name="2nd-parking-lot-bag" value="/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot5-from-2nd-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-00-01.bag"/>
-    <arg name="1st-parking-lot-bag" value="/home/jiuzl/bags/abstract_observation_bag/fined_tuned_bag/robot4-from-1st-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-07-35.bag"/>
+    <arg name="3rd-parking-lot-bag" value="/opt/bags/abstract_observation_bag/fined_tuned_bag/robot6-from-3rd-parking-lot-around-building-falcon-xmas-slam-pennovation_2023-10-20-13-22-40.bag"/>
+    <arg name="2nd-parking-lot-bag" value="/opt/bags/abstract_observation_bag/fined_tuned_bag/robot5-from-2nd-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-00-01.bag"/>
+    <arg name="1st-parking-lot-bag" value="/opt/bags/abstract_observation_bag/fined_tuned_bag/robot4-from-1st-parking-lot-falcon-xmas-slam-pennovation_2023-10-20-13-07-35.bag"/>
     
     <!-- <rosparam file="$(find sloam)/params/sloam.yaml" command="load" />
     <include file="$(find sloam)/launch/single_robot_sloam_test_benchmark.launch">

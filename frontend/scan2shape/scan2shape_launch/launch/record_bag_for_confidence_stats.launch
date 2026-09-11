@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <arg name="dir" default="/home/sam/bags/pennovation-bags/confidence_stats" />
+    <arg name="dir" default="/opt/bags/pennovation-bags/confidence_stats" />
     <node pkg="rosbag" type="record" name="recorder" args="
   -o $(arg dir)
   /os_node/image

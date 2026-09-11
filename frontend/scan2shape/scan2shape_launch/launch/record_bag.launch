@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <!-- <arg name="dir" default="/home/sam/bags/pennovation-bags/generic_sloam_multi_robot" /> -->
-  <arg name="dir" default="/home/sam/bags/pennovation-bags/stats_car_confidence_sloam_multi_robot" />
+  <!-- <arg name="dir" default="/opt/bags/pennovation-bags/generic_sloam_multi_robot" /> -->
+  <arg name="dir" default="/opt/bags/pennovation-bags/stats_car_confidence_sloam_multi_robot" />
   <node pkg="rosbag" type="record" name="recorder" args="
   -o $(arg dir)
   /clock                                                                                                                                                                

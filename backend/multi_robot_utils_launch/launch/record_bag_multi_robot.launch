@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="dir" default="/home/sam/bags/xmas-slam-bags" />
+  <arg name="dir" default="/opt/bags/xmas-slam-bags" />
   <arg name="robot1_ns" default="/quadrotor1" />
   <arg name="robot2_ns" default="/quadrotor2" />
   <arg name="robot3_ns" default="/quadrotor3" />
