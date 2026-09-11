@@ -5,7 +5,7 @@
 >
 > This branch ports the entire SlideSLAM stack from **ROS1 Noetic** to **ROS2 Jazzy Jalisco** (Ubuntu 24.04) — the latest ROS2 LTS. It is provided to help developers who want to use SlideSLAM with ROS2.
 >
-> **Note:** this ROS2 port has **not been as extensively tested or experimented with** as the ROS1 version. If you want the version used to produce the results in our paper, or the most battle-tested setup, please use the [`master`](https://github.com/KumarRobotics/SLIDE_SLAM/tree/master) branch (ROS1 Noetic, Ubuntu 20.04). See [Testing the ROS2 port](#testing-the-ros2-port) at the end of this README for the full list of static and runtime checks we **do** run on this branch, and which runtime behaviors have **not** been verified end-to-end. For a detailed, per-package breakdown of everything that was migrated, the mechanical rules applied, and the open follow-up items, see [`ROS2_MIGRATION_REPORT.md`](ROS2_MIGRATION_REPORT.md) at the root of this branch.
+> **Note:** this ROS2 port has **not been as extensively tested or experimented with** as the ROS1 version. If you want the version used to produce the results in our paper, or the most battle-tested setup, please use the [`master`](https://github.com/KumarRobotics/SLIDE_SLAM/tree/master) branch (ROS1 Noetic, Ubuntu 20.04). See [Testing the ROS2 port](#testing-the-ros2-port) at the end of this README for the full list of static and runtime checks we **do** run on this branch, and which runtime behaviors have **not** been verified end-to-end.
 >
 > Issues and pull requests that improve the ROS2 port are very welcome.
 
@@ -16,7 +16,7 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 # Table of contents
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
-- [Quickstart with Pixi (Recommended)](#quickstart-with-pixi-recommended)
+- [Quickstart with Pixi](#quickstart-with-pixi)
 - [Converting ROS1 bags to ROS2 (required before running demos)](#converting-ros1-bags-to-ros2-required-before-running-demos)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
   - [Download example data](#download-example-data)
@@ -38,7 +38,7 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 
 
 
-# Quickstart with Pixi (Recommended)
+# Quickstart with Pixi
 
 SlideSLAM on ROS 2 Jazzy can be run via [Pixi](https://pixi.sh) using `conda-forge` and `robostack-jazzy`. Workspace dependencies (ROS 2 Jazzy, GTSAM 4.2, PCL, OpenCV, Eigen 3.4, Sophus, Qhull) are managed locally without modifying system packages or requiring Docker.
 
