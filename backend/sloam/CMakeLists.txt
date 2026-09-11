@@ -208,8 +208,6 @@ install(DIRECTORY include/
 )
 
 install(TARGETS
-    ${CC_TARGET_PREFIX}_log
-    ${CC_TARGET_PREFIX}_base
     ${CC_TARGET_PREFIX}_objects
     ${CC_TARGET_PREFIX}_viz
     ${CC_TARGET_PREFIX}_map

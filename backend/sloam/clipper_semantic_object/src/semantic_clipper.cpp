@@ -1,5 +1,7 @@
 #include "semantic_clipper.h"
-#include <ros/ros.h>
+#ifndef ROS_INFO_STREAM
+#define ROS_INFO_STREAM(x) do { std::cout << x << std::endl; } while (0)
+#endif
 
 namespace semantic_clipper{
 

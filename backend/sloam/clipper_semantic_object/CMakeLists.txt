@@ -25,7 +25,7 @@ option(CLIPPER_BUILD_BENCHMARKS "Build benchmarks" OFF)
 option(CLIPPER_ENABLE_MKL "Use MKL with Eigen" OFF)
 option(CLIPPER_ENABLE_BLAS "Use BLAS with Eigen" OFF) # apt install libopenblas-dev
 option(CLIPPER_ENABLE_MAXCLIQUE "Use PMC lib for solveAsMaximumClique" ON)
-option(CLIPPER_ENABLE_SCS_SDR "Use SCS lib for solveAsMSRCSDR" ON)
+option(CLIPPER_ENABLE_SCS_SDR "Use SCS lib for solveAsMSRCSDR" OFF)
 
 if(CLIPPER_ENABLE_MKL AND CLIPPER_ENABLE_BLAS)
   message(FATAL_ERROR "Cannot enable both MKL and BLAS (prefer MKL)")
@@ -39,8 +39,12 @@ endif()
 # catkin dependency removed for ROS2 Jazzy port — clipper is built as a plain CMake subdirectory
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED)
-INCLUDE_DIRECTORIES(/usr/local/include/libqhullcpp)
-INCLUDE_DIRECTORIES(/usr/local/include/libqhull_r)
+find_package(Qhull QUIET)
+if(DEFINED ENV{CONDA_PREFIX})
+  include_directories($ENV{CONDA_PREFIX}/include/libqhullcpp $ENV{CONDA_PREFIX}/include/libqhull_r)
+  link_directories($ENV{CONDA_PREFIX}/lib)
+endif()
+include_directories(/usr/local/include/libqhullcpp /usr/local/include/libqhull_r)
 include_directories(${OpenCV_INCLUDE_DIRS})
 SET(qhullLibs qhullcpp qhull_r)
 LINK_DIRECTORIES(/usr/local/lib)
@@ -118,13 +122,6 @@ target_link_libraries(clipper PRIVATE OpenMP::OpenMP_CXX)
 target_include_directories(clipper PUBLIC
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
-# Provide no-op shims for ROS1 logging macros that still appear in this
-# vendored third-party source so the file compiles without roscpp.
-target_compile_definitions(clipper PRIVATE
-  "ROS_INFO_STREAM(x)=do{}while(0)"
-  "ROS_WARN_STREAM(x)=do{}while(0)"
-  "ROS_ERROR_STREAM(x)=do{}while(0)"
-  "ROS_DEBUG_STREAM(x)=do{}while(0)")
 target_compile_options(clipper PUBLIC -march=native -mavx -mfma)
 set_target_properties(clipper PROPERTIES
   VERSION ${PROJECT_VERSION})
