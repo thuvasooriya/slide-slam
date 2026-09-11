@@ -44,8 +44,8 @@ class CylinderMeasurement {
    */
   gtsam::Vector7 localCoordinates(const CylinderMeasurement &q) const {
     gtsam::Vector7 v = gtsam::Vector7::Zero();
-    v.segment(0, 3) = ray.localCoordinates(q.ray);
-    v.segment(3, 3) = root.localCoordinates(q.root);
+    v.segment<3>(0) = q.ray - ray;
+    v.segment<3>(3) = q.root - root;
     v[6] = radius - q.radius;
     return v;
   }
@@ -57,8 +57,8 @@ class CylinderMeasurement {
    * @return CylinderMeasurement on the manifold
    */
   CylinderMeasurement retract(const gtsam::Vector7 &v) const {
-    gtsam::Point3 axis = ray.retract(v.segment(0, 3));
-    gtsam::Point3 pos = root.retract(v.segment(3, 3));
+    gtsam::Point3 axis = ray + v.segment<3>(0);
+    gtsam::Point3 pos = root + v.segment<3>(3);
     double r = radius + v.tail<1>()[0];
     return CylinderMeasurement(pos, axis, r);
   }
@@ -94,15 +94,15 @@ class CylinderMeasurement {
   }
 
   void print(const std::string &s = "") const {
-    cout << s;
-    cout << "Root\n" << root << endl;
-    cout << "Ray\n" << ray << endl;
-    cout << "Radius" << radius << endl;
+    std::cout << s;
+    std::cout << "Root\n" << root << std::endl;
+    std::cout << "Ray\n" << ray << std::endl;
+    std::cout << "Radius" << radius << std::endl;
   }
 
   bool equals(const CylinderMeasurement &other, double tol = 1e-9) const {
-    return root.equals(other.root, tol) && ray.equals(other.ray, tol) &&
-           abs(radius - other.radius) < tol;
+    return (root - other.root).norm() < tol && (ray - other.ray).norm() < tol &&
+           std::abs(radius - other.radius) < tol;
   }
 
   Scalar distance(const CylinderMeasurement &cm) const {

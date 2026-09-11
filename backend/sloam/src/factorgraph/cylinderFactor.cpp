@@ -33,18 +33,17 @@ gtsam::Vector CylinderFactor::evaluateError(
 
   // All errors are in map frame, not in the sensor frame
   gtsam::Vector7 error = m_.project(p).localCoordinates(q);
-  boost::function<gtsam::Vector(const gtsam::Pose3 &,
-                                const CylinderMeasurement &)>
-      funPtr(boost::bind(&CylinderFactor::evaluateError, this, _1, _2,
-                         boost::none, boost::none));
+  auto funPtr = [this](const gtsam::Pose3 &p_val, const CylinderMeasurement &q_val) -> gtsam::Vector {
+    return this->evaluateError(p_val, q_val, boost::none, boost::none);
+  };
   if (H1) {
     Eigen::Matrix<double, 7, 6> de_dx =
-        gtsam::numericalDerivative21(funPtr, p, q, 1e-6);
+        gtsam::numericalDerivative21<gtsam::Vector7, gtsam::Pose3, CylinderMeasurement>(funPtr, p, q, 1e-6);
     *H1 = de_dx;
   }
   if (H2) {
     Eigen::Matrix<double, 7, 7> de_dc =
-        gtsam::numericalDerivative22(funPtr, p, q, 1e-6);
+        gtsam::numericalDerivative22<gtsam::Vector7, gtsam::Pose3, CylinderMeasurement>(funPtr, p, q, 1e-6);
     *H2 = de_dc;
   }
   return error;
