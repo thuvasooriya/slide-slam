@@ -37,7 +37,7 @@ namespace sloam {
 
 // functions adapted from ros tf2/tf2_eigen since
 // the original implementation needs double...
-geometry_msgs::msg::Quaternion toMsg_(const Quaternionf &in);
+geometry_msgs::msg::Quaternion toMsg_(const Quat &in);
 geometry_msgs::msg::Point toMsg_(const Vector3 &in);
 geometry_msgs::msg::Quaternion toRosQuat_(const Sophus::SO3d &R);
 geometry_msgs::msg::Pose toRosPose_(const SE3 &T);
