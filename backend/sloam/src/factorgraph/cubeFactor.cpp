@@ -34,19 +34,19 @@ gtsam::Vector CubeFactor::evaluateError(
   // all errors are in map frame, not in the sensor frame
   gtsam::Vector9 error = m_.project(p).localCoordinates(cube_lmrk);
 
-  boost::function<gtsam::Vector(const gtsam::Pose3 &, const CubeMeasurement &)>
-      funPtr(boost::bind(&CubeFactor::evaluateError, this, _1, _2, boost::none,
-                         boost::none));
+  auto funPtr = [this](const gtsam::Pose3 &p_val, const CubeMeasurement &cube_val) -> gtsam::Vector {
+    return this->evaluateError(p_val, cube_val, boost::none, boost::none);
+  };
   // Jacobian of error wrt pose
   if (H1) {
     Eigen::Matrix<double, 9, 6> de_dx =
-        gtsam::numericalDerivative21(funPtr, p, cube_lmrk, 1e-6);
+        gtsam::numericalDerivative21<gtsam::Vector9, gtsam::Pose3, CubeMeasurement>(funPtr, p, cube_lmrk, 1e-6);
     *H1 = de_dx;
   }
   // Jacobian of error wrt cube measurement
   if (H2) {
     Eigen::Matrix<double, 9, 9> de_dc =
-        gtsam::numericalDerivative22(funPtr, p, cube_lmrk, 1e-6);
+        gtsam::numericalDerivative22<gtsam::Vector9, gtsam::Pose3, CubeMeasurement>(funPtr, p, cube_lmrk, 1e-6);
     *H2 = de_dc;
   }
   return error;

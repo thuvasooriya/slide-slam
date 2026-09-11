@@ -89,9 +89,9 @@ class SLOAMNode : public sloam {
  private:
   // TODO(xu): load the following four params from rosparam
   bool save_inter_robot_closure_results_ = true;
-  string save_results_dir_ = "/home/sam";
+  std::string save_results_dir_ = "/tmp";
   bool save_robot_trajectory_as_csv_ = false;
-  string save_runtime_analysis_dir_ = "/home/sam";
+  std::string save_runtime_analysis_dir_ = "/tmp";
 
 
   double inter_robot_place_recognition_frequency_;

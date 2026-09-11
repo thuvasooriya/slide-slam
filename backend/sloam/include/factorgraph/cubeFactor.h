@@ -109,7 +109,7 @@ class CubeMeasurement {
     // gtsam::Pose3 pose_new = gtsam::Pose3(pose_new_sophus.matrix());
 
     // convert to gtsam point so that we can use retract
-    gtsam::Point3 scale_new = scale.retract(v.segment(6, 3));
+    gtsam::Point3 scale_new = scale + v.segment<3>(6);
     return CubeMeasurement(pose_new, scale_new);
   }
 
@@ -159,10 +159,10 @@ class CubeMeasurement {
     return v;
   }
 
-  void print(const std::string &s = "") const { cout << s; }
+  void print(const std::string &s = "") const { std::cout << s << std::endl; }
 
   bool equals(const CubeMeasurement &other, double tol = 1e-9) const {
-    return pose.equals(other.pose, tol) && scale.equals(other.scale, tol);
+    return pose.equals(other.pose, tol) && (scale - other.scale).norm() < tol;
   }
 
   Scalar distance(const CubeMeasurement &input) const {

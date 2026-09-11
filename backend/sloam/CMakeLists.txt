@@ -100,7 +100,7 @@ cc_library(
   NAME core
   INCS include/core ${CLIPPER_DIR}/include
   SRCS "src/core/sloam.cpp" "src/core/robot.cpp" "src/core/databaseManager.cpp" "src/core/place_recognition.cpp"
-  DEPS sloam_log sloam_base sloam_objects sloam_viz sloam_map sloam_factorgraph Eigen3::Eigen gtsam ${catkin_LIBRARIES} -ldw
+  DEPS sloam_log sloam_base sloam_objects sloam_viz sloam_map sloam_factorgraph Eigen3::Eigen gtsam ${catkin_LIBRARIES}
   DEFINES USE_CLIPPER=${CLIPPER_VALUE}
 )
 
@@ -111,7 +111,7 @@ endif()
 cc_binary(
   NAME node
   SRCS "src/core/sloamNode.cpp" "src/core/inputNode.cpp"
-  DEPS sloam_log sloam_base sloam_objects sloam_core sloam_viz sloam_factorgraph gtsam ${catkin_LIBRARIES} -ldw #sloam_loop 
+  DEPS sloam_log sloam_base sloam_objects sloam_core sloam_viz sloam_factorgraph gtsam ${catkin_LIBRARIES} #sloam_loop
   # DEPS sloam_log sloam_base sloam_objects sloam_core sloam_viz sloam_segmentation sloam_factorgraph gtsam ${catkin_LIBRARIES} -ldw #sloam_loop 
 )
 

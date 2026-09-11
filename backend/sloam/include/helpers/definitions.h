@@ -24,7 +24,31 @@
 
 #define PIDEF 3.14159265
 
-using namespace Eigen;
+using Eigen::Vector2d;
+using Eigen::Vector3d;
+using Eigen::Vector4d;
+using Eigen::VectorXd;
+using Eigen::Vector2f;
+using Eigen::Vector3f;
+using Eigen::Vector4f;
+using Eigen::VectorXf;
+using Eigen::Matrix2d;
+using Eigen::Matrix3d;
+using Eigen::Matrix4d;
+using Eigen::MatrixXd;
+using Eigen::Matrix2f;
+using Eigen::Matrix3f;
+using Eigen::Matrix4f;
+using Eigen::MatrixXf;
+using Eigen::Quaterniond;
+using Eigen::Quaternionf;
+using Eigen::Translation3d;
+using Eigen::Translation3f;
+using Eigen::Affine3d;
+using Eigen::Affine3f;
+using Eigen::AngleAxisd;
+using Eigen::AngleAxisf;
+using Eigen::JacobiSVD;
 using namespace boost;
 
 using SE3 = Sophus::SE3d;
