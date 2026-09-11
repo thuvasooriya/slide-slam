@@ -16,7 +16,7 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 # Table of contents
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
-- [Hermetic Quickstart with Pixi (Recommended)](#hermetic-quickstart-with-pixi-recommended)
+- [Quickstart with Pixi (Recommended)](#quickstart-with-pixi-recommended)
 - [Build from source (Manual without Pixi)](#build-from-source-manual-without-pixi)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
   - [Download example data](#download-example-data)
@@ -33,9 +33,9 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 
 
 
-# Hermetic Quickstart with Pixi (Recommended)
+# Quickstart with Pixi (Recommended)
 
-SlideSLAM on ROS 1 Noetic is packaged with [Pixi](https://pixi.sh), providing a 100% hermetic, zero-Docker, zero-sudo environment using `conda-forge` and `robostack`. It provisions ROS 1 Noetic, GTSAM, PCL, OpenCV, Eigen 3.4, Sophus, Qhull, and all build tools locally without touching your host system or `/usr/local`.
+SlideSLAM on ROS 1 Noetic can be run via [Pixi](https://pixi.sh) using `conda-forge` and `robostack`. Workspace dependencies (ROS 1 Noetic, GTSAM, PCL, OpenCV, Eigen 3.4, Sophus, Qhull) are managed locally without modifying system packages or requiring Docker.
 
 ### 1. Install Pixi / mise
 ```bash
@@ -49,7 +49,7 @@ mise use -g pixi
 git clone https://github.com/thuvasooriya/slide-slam.git
 cd slide-slam
 
-# 1-command dependency resolution & hermetic environment install:
+# Install dependencies:
 pixi install
 
 # Initialize workspace configuration (first time only):
@@ -101,7 +101,6 @@ make install
 sudo add-apt-repository ppa:borglab/gtsam-release-4.0 
 sudo apt update  
 sudo apt install libgtsam-dev libgtsam-unstable-dev
-sudo apt-get install libdw-dev
 ```
 
 **Install Sophus**: 

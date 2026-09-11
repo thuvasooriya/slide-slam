@@ -1,7 +1,7 @@
 [workspace]
 name = "slide_slam_noetic"
 version = "1.0.0"
-description = "Hermetic ROS 1 Noetic build of SlideSLAM master branch via Pixi & RoboStack"
+description = "ROS 1 Noetic build of SlideSLAM via Pixi and RoboStack"
 channels = ["https://repo.prefix.dev/robostack", "conda-forge"]
 platforms = ["linux-64"]
 
