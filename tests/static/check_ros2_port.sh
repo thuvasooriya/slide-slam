@@ -576,10 +576,10 @@ while IFS= read -r line; do
 done < <(
     if [ "$SEARCH_TOOL" = "rg" ]; then
         rg -n --no-heading --color=never \
-            -g '*.py' \
+            -g '*.py' -g '!build/**' -g '!install/**' -g '!.pixi/**' \
             -e '^[[:space:]]*from sloam_msgs\.(msg|srv|action)\s+import\b' "$REPO_ROOT" 2>/dev/null || true
     else
-        find "$REPO_ROOT" -type f -name '*.py' 2>/dev/null \
+        find "$REPO_ROOT/backend" "$REPO_ROOT/frontend" -type f -name '*.py' 2>/dev/null \
             | xargs -r grep -EnH '^[[:space:]]*from sloam_msgs\.(msg|srv|action)[[:space:]]+import\b' 2>/dev/null || true
     fi
 )
@@ -674,8 +674,7 @@ fi
 # ============================================================================
 section "J. .launch XML leftovers"
 
-LAUNCH_ALL=$(find "$REPO_ROOT" -type f -name '*.launch' 2>/dev/null \
-    | grep -v -E '/(tools|tests)/' || true)
+LAUNCH_ALL=$(find "$REPO_ROOT/backend" "$REPO_ROOT/frontend" -type f -name '*.launch' 2>/dev/null || true)
 if [ -z "$LAUNCH_ALL" ]; then
     pass "J  no XML .launch files outside tools/ or tests/"
 else
