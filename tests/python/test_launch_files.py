@@ -25,7 +25,7 @@ def find_launch_xml(repo_root: Path) -> list[Path]:
     out: list[Path] = []
     for p in repo_root.rglob("*.launch"):
         rel = p.relative_to(repo_root).as_posix()
-        if rel.startswith(("tools/", "tests/")):
+        if rel.startswith(("tools/", "tests/", ".pixi/", "build/", "install/")):
             continue
         out.append(p)
     return out
