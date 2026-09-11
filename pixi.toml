@@ -1,7 +1,7 @@
 [workspace]
 name = "slide_slam"
 version = "1.0.0"
-description = "Hermetic ROS 2 Jazzy build of SlideSLAM via Pixi & RoboStack"
+description = "ROS 2 Jazzy build of SlideSLAM via Pixi and RoboStack"
 channels = ["https://repo.prefix.dev/robostack-jazzy", "conda-forge"]
 platforms = ["linux-64"]
 

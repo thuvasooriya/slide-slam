@@ -16,7 +16,7 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 # Table of contents
 - [SlideSLAM](#slideslam)
 - [Table of contents](#table-of-contents)
-- [Hermetic Quickstart with Pixi (Recommended)](#hermetic-quickstart-with-pixi-recommended)
+- [Quickstart with Pixi (Recommended)](#quickstart-with-pixi-recommended)
 - [Build from source (Manual without Pixi)](#build-from-source-manual-without-pixi)
 - [Converting ROS1 bags to ROS2 (required before running demos)](#converting-ros1-bags-to-ros2-required-before-running-demos)
 - [Run our demos (with processed data)](#run-our-demos-with-processed-data)
@@ -39,9 +39,9 @@ This repository contains the source code for the project SlideSLAM: Sparse, Ligh
 
 
 
-# Hermetic Quickstart with Pixi (Recommended)
+# Quickstart with Pixi (Recommended)
 
-SlideSLAM on ROS 2 Jazzy is packaged with [Pixi](https://pixi.sh), providing a 100% hermetic, zero-Docker, zero-sudo environment using `conda-forge` and `robostack-jazzy`. It provisions ROS 2 Jazzy, GTSAM 4.2, PCL, OpenCV, Eigen 3.4, Sophus, Qhull, and all build tools locally without touching your host system or `/usr/local`.
+SlideSLAM on ROS 2 Jazzy can be run via [Pixi](https://pixi.sh) using `conda-forge` and `robostack-jazzy`. Workspace dependencies (ROS 2 Jazzy, GTSAM 4.2, PCL, OpenCV, Eigen 3.4, Sophus, Qhull) are managed locally without modifying system packages or requiring Docker.
 
 ### 1. Install Pixi / mise
 ```bash
@@ -56,7 +56,7 @@ git clone https://github.com/thuvasooriya/slide-slam.git
 cd slide-slam
 git checkout ros2_dev
 
-# 1-command dependency resolution & hermetic environment install:
+# Install dependencies:
 pixi install
 
 # Build all 5 ROS 2 Jazzy workspace packages in parallel:
@@ -117,13 +117,11 @@ make install
 ```
 *If ```make install``` gives a permission error then try ```sudo make install```*
 
-**Install gtsam 4.0.3**:
+**Install gtsam**:
 
 ```
-sudo add-apt-repository ppa:borglab/gtsam-release-4.0 
 sudo apt update  
 sudo apt install libgtsam-dev libgtsam-unstable-dev
-sudo apt-get install libdw-dev
 ```
 
 **Install Sophus**: 

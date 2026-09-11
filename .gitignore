@@ -23,4 +23,10 @@ build/
 install/
 log/
 .pixi/
+devel/
+/devel/
+.catkin_tools/
+/.catkin_tools/
+logs/
+/logs/
 
