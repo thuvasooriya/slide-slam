@@ -46,6 +46,7 @@ fmt = "*"
 yaml-cpp = "*"
 qhull = "*"
 tmux = "*"
+qhull-static = ">=2020.2,<2021"
 
 [tasks]
 config = "catkin config --init --source-space ."
