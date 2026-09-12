@@ -30,7 +30,7 @@ class Inference:
         torch.set_num_threads(num_cpu_threads)
 
         model_directory = rospy.get_param(
-            "/"+self.node_name+"/model_dir", default="/home/sam/semantic-segmentation/lidar-bonnetal/pennovation-darknet-smallest/")
+            "/"+self.node_name+"/model_dir", default="")
         namespace = rospy.get_param(
             "/"+self.node_name+"/namespace", default="/os_node")
         print(f"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
