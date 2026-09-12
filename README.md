@@ -62,6 +62,10 @@ pixi install
 pixi run build
 ```
 
+Note: the two branches share the `build/` directory (colcon on `ros2_dev`,
+catkin on `master`), so run `pixi run clean` before rebuilding after switching
+branches.
+
 ### 3. Verify & Run Tests
 ```bash
 # Run the 55-check static port verification suite:
