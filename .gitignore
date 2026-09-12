@@ -11,6 +11,7 @@ scan2shape/script/max_scale.pkl
 /*/*/build/
 *log*.txt
 *.bag
+*.db3
 *.pt
 *.npy
 .vscode

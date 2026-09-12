@@ -538,20 +538,6 @@ Symbol SemanticFactorGraph::getSymbol(const int &robotID, const size_t idx) {
 //     }
 //   }
 
-//   std::ofstream entropy_log_file("/home/yuezhan/bags/entropy_log.txt",
-//   ios::app); if (entropy_log_file.fail()){
-//     cout << "open file error!\n";
-//   }
-//   rclcpp::Time time_now = node_->now();
-//   // write a header for entropy log file if it is empty, header is TIME,
-//   ENTROPY_POSE, ENTROPY_LANDMARK, NUM_VALID_POSES if
-//   (entropy_log_file.tellp() == 0) {
-//     entropy_log_file << "TIME, ENTROPY_POSE, ENTROPY_LANDMARK,
-//     NUM_VALID_POSES, NUM_VALID_LANDMARKS" << std::endl;
-//   }
-//   entropy_log_file << (time_now-start_time_).toSec() << ", " <<
-//   sum_entropy_pose << ", " << sum_entropy_landmark << ", " << num_valid_poses
-//   << ", " << num_valid_landmarks << std::endl; entropy_log_file.close();
 
 // }
 

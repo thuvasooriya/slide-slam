@@ -559,26 +559,6 @@ bool PlaceRecognition::findInterLoopClosureWithClipper(
     const std::vector<Eigen::Vector7d> &query_objects,
     Eigen::Matrix4d &tfFromQueryToRef) {
 
-    // // save the input in a file for debugging
-    // std::ofstream reference_objects_file;
-    // // TODO(ankit): Remove hardcoding of the file path
-    // std::string save_reference_objects_file_path = "/home/sam/reference_objects.txt";
-    // // if not exist, create the file, if exist, truncate it
-    // reference_objects_file.open(save_reference_objects_file_path);
-    // for (int i = 0; i < reference_objects.size(); i++) {
-    //   reference_objects_file << reference_objects[i][0] << " " << reference_objects[i][1] << " " << reference_objects[i][2] << " " << reference_objects[i][3] << " " << reference_objects[i][4] << " " << reference_objects[i][5] << " " << reference_objects[i][6] << std::endl;
-    // }
-    // reference_objects_file.close();
-
-    // std::ofstream query_objects_file;
-    // std::string save_query_objects_file_path = "/home/sam/query_objects.txt";
-    // query_objects_file.open(save_query_objects_file_path);
-    // for (int i = 0; i < query_objects.size(); i++) {
-    //   query_objects_file << query_objects[i][0] << " " << query_objects[i][1] << " " << query_objects[i][2] << " " << query_objects[i][3] << " " << query_objects[i][4] << " " << query_objects[i][5] << " " << query_objects[i][6] << std::endl;
-    // }
-    // query_objects_file.close();
-
-    
     double sigma = slidegraph_sigma_;
     double epsilon = slidegraph_epsilon_;
     int min_num_pairs = slidegraph_num_inliners_;
