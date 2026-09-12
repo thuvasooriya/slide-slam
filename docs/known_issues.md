@@ -35,9 +35,10 @@ before pointing `model_dir` at them.
 
 ## Workflow conventions
 
-- Bag data is external (multi-GB, not in git). Demo scripts default to
-  `/opt/bags/...` and honor `SLIDE_SLAM_BAG_DIR`; the frontend
-  `play_bag_with_remapping.launch.py` additionally accepts `bag_base:=`.
+- Bag data is external (multi-GB, not in git). Fetch it headlessly with
+  `pixi run python tools/gdrive_key.py download <folder-url> -O <dir>`
+  (`tools/gdrive_key.py` sends Drive `resourcekey`s, which stock `gdown`
+  cannot — plain `gdown` 401s on these legacy link-shared folders).
 - `backend/sloam/clipper_semantic_object/` is vendored third-party and exempt
   from the static checker; its `/home/jiuzhou` example paths are upstream
   dead code, never built (`CLIPPER_BUILD_TESTS=OFF`).
